@@ -24,8 +24,8 @@ class Home_Page extends StatelessWidget {
                     //  mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        padding: EdgeInsets.only(top: 290, left: 45),
-                        child: Text(
+                        padding: const EdgeInsets.only(top: 290, left: 45),
+                        child: const Text(
                           "Dancing between       The shadows       Of rhythm ",
                           style: TextStyle(
                             fontSize: 43,
@@ -34,11 +34,11 @@ class Home_Page extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 65,
                       ),
                       Container(
-                        child: Center(
+                        child: const Center(
                             child: Text(
                           "Get Starterd ",
                           style: TextStyle(
@@ -48,7 +48,7 @@ class Home_Page extends StatelessWidget {
                         )),
                         width: 290,
                         height: 50,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           boxShadow: [
                             BoxShadow(color: Colors.black12, spreadRadius: 1)
                           ],
@@ -56,11 +56,11 @@ class Home_Page extends StatelessWidget {
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 83),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 83),
                         child: Text(
                           "by continuing you agree to terms                                                                        of services and  Privacy policy",
                           style: TextStyle(
