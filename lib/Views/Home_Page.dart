@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:music_player/Views/Gallery_Page.dart';
 
 class Home_Page extends StatelessWidget {
   const Home_Page({super.key});
+  static String id = "Home_Page";
 
   @override
   Widget build(BuildContext context) {
@@ -37,23 +39,27 @@ class Home_Page extends StatelessWidget {
                       const SizedBox(
                         height: 65,
                       ),
-                      Container(
-                        child: const Center(
-                            child: Text(
-                          "Get Starterd ",
-                          style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
+                      GestureDetector(
+                        onTap: () =>
+                            Navigator.pushNamed(context, Gallery_Page.id),
+                        child: Container(
+                          child: const Center(
+                              child: Text(
+                            "Get Starterd ",
+                            style: TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )),
+                          width: 290,
+                          height: 50,
+                          decoration: const BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(color: Colors.black12, spreadRadius: 1)
+                            ],
+                            color: Colors.red,
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
                           ),
-                        )),
-                        width: 290,
-                        height: 50,
-                        decoration: const BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(color: Colors.black12, spreadRadius: 1)
-                          ],
-                          color: Colors.red,
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
                       ),
                       const SizedBox(
