@@ -4,6 +4,7 @@ import 'Views/Gallery_Page.dart';
 
 import 'Views/Home_Page.dart';
 
+
 void main() {
   runApp(const MyApp());
 }
@@ -14,15 +15,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+ //   var Controller=Get.put(PlayerController());
+
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
         Gallery_Page.id: (context) => Gallery_Page(),
-        Home_Page.id: (context) => Home_Page(),
+        Home_Page.id: (context) => const Home_Page(),
       },
 
       initialRoute: Home_Page.id,
-      //   home: Home_Page2(),
+        // home: PlayerController(),
     );
   }
 }

@@ -16,105 +16,287 @@ class _Gallery_PageState extends State<Gallery_Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Container(
-        width: double.infinity,
-        height: 100,
-        child:  Row(
-         children: [
-           Padding(
-             padding: const EdgeInsets.only(left: 10,bottom: 13),
-             child: Column(
-               children: [
-                 IconButton(onPressed: (){}, icon: Icon(Icons.favorite_border,color: Colors.white,)),
-                 Text("Favorite",style: TextStyle(color: Colors.white),)
-
-
-
-               ],
-
-             ),
-           ),
-           SizedBox(width: 20,),
-           Padding(
-             padding: const EdgeInsets.only(left: 10,bottom: 13),
-             child: Column(
-               children: [
-                 IconButton(onPressed: (){}, icon: Icon(Icons.search,color: Colors.white,)),
-                 Text("Search ",style: TextStyle(color: Colors.white),)
-
-
-
-               ],
-
-             ),
-           ),
-           SizedBox(width: 20,),
-
-           Padding(
-             padding: const EdgeInsets.only(left: 10,bottom: 13),
-             child: Column(
-               children: [
-                 IconButton(onPressed: (){}, icon: Icon(Icons.home,color: Colors.white,)),
-                 Text("Home",style: TextStyle(color: Colors.white),)
-
-
-
-               ],
-
-             ),
-           ),
-           SizedBox(width: 20,),
-
-           Padding(
-             padding: const EdgeInsets.only(left: 10,bottom: 13),
-             child: Column(
-               children: [
-                 IconButton(onPressed: (){}, icon: Icon(Icons.card_travel,color: Colors.white,)),
-                 Text("Cart",style: TextStyle(color: Colors.white),)
-
-
-
-               ],
-
-             ),
-           ),
-           SizedBox(width: 20,),
-
-           Padding(
-             padding: const EdgeInsets.only(left: 10,bottom: 13),
-             child: Column(
-               children: [
-                 IconButton(onPressed: (){}, icon: Icon(Icons.person,color: Colors.white,)),
-                 Text("Profile",style: TextStyle(color: Colors.white),)
-
-
-
-               ],
-
-             ),
-           ),
-
-
-
-
-
-
-
-
-         ],
-        ),
-      ),
+      bottomNavigationBar: Custmo_ButtomNavigatorBar(),
       backgroundColor: Colors.black,
       body: ListView(
         children: [
-          Carousel_slider(currentIndexPage: 0),
-          Discography_Pics_row(),
-          Container(
-            width: double.infinity,
-            height: 80,
-            color: Colors.red,
+          const Carousel_slider(currentIndexPage: 0),
+          Padding(
+            padding: const EdgeInsets.only(left: 15, bottom: 10),
+            child: Row(
+              children: [
+                Text(
+                  "Discography",
+                  style: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25),
+                ),
+                Spacer(
+                  flex: 1,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(right: 15, bottom: 10, top: 5),
+                  child: Text(
+                    "See all",
+                    style: TextStyle(
+                        color: Colors.amber,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 23),
+                  ),
+                ),
+              ],
+            ),
           ),
+          const Discography_Pics_row(),
+          Padding(
+            padding: const EdgeInsets.only(left: 15, bottom: 10),
+            child: Row(
+              children: [
+                Text(
+                  " Popular Singles",
+                  style: TextStyle(
+                      color: Colors.white70,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25),
+                ),
+                Spacer(
+                  flex: 1,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(right: 15, bottom: 10, top: 5),
+                  child: Text(
+                    "See all",
+                    style: TextStyle(
+                        color: Colors.amber,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 23),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Pupular_Singles_List(),
+        ],
+      ),
+    );
+  }
+}
 
+class Pupular_Singles_List extends StatelessWidget {
+  const Pupular_Singles_List({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 290,
+      child: ListView(
+        children: [
+          Pupular_Singles(
+            Pictures: "assets/Rectangle 32.png",
+          ),
+          Pupular_Singles(
+            Pictures: "assets/Rectangle 34.png",
+          ),
+          Pupular_Singles(
+            Pictures: "assets/Rectangle 38.png",
+          ),
+          Pupular_Singles(
+            Pictures: "assets/Rectangle 39.png",
+          ),
+          Pupular_Singles(
+            Pictures: "assets/Rectangle 32.png",
+          ),
+          Pupular_Singles(
+            Pictures: "assets/Rectangle 34.png",
+          ),
+          Pupular_Singles(
+            Pictures: "assets/Rectangle 38.png",
+          ),
+          Pupular_Singles(
+            Pictures: "assets/Rectangle 39.png",
+          ),
+          Pupular_Singles(
+            Pictures: "assets/Rectangle 32.png",
+          ),
+          Pupular_Singles(
+            Pictures: "assets/Rectangle 34.png",
+          ),
+          Pupular_Singles(
+            Pictures: "assets/Rectangle 38.png",
+          ),
+          Pupular_Singles(
+            Pictures: "assets/Rectangle 39.png",
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class Pupular_Singles extends StatelessWidget {
+  Pupular_Singles({super.key, this.Pictures});
+
+  String? Pictures;
+
+  @override
+  Widget build(BuildContext context) {
+    if (Pictures == null) {
+      Pictures = "assets/Rectangle 32.png";
+    }
+
+    return Container(
+      width: double.infinity,
+      height: 120,
+      child: Padding(
+        padding: const EdgeInsets.all(17),
+        child: Row(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(15))),
+              child: Image.asset(
+                '${Pictures}',
+                fit: BoxFit.fill,
+              ),
+            ),
+            Container(
+                padding: EdgeInsets.all(13),
+                alignment: Alignment.topCenter,
+                child: Text(
+                  "We Are Chaos",
+                  style: TextStyle(
+                      color: Colors.white70,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
+                )),
+            Spacer(
+              flex: 1,
+            ),
+            IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.more_vert,
+                  color: Colors.white70,
+                  size: 45,
+                ))
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Custmo_ButtomNavigatorBar extends StatelessWidget {
+  const Custmo_ButtomNavigatorBar({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 100,
+      child: Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 10, bottom: 13),
+            child: Column(
+              children: [
+                IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.favorite_border,
+                      color: Colors.white,
+                    )),
+                const Text(
+                  "Favorite",
+                  style: TextStyle(color: Colors.white),
+                )
+              ],
+            ),
+          ),
+          const SizedBox(
+            width: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 10, bottom: 13),
+            child: Column(
+              children: [
+                IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.search,
+                      color: Colors.white,
+                    )),
+                const Text(
+                  "Search ",
+                  style: TextStyle(color: Colors.white),
+                )
+              ],
+            ),
+          ),
+          const SizedBox(
+            width: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 10, bottom: 13),
+            child: Column(
+              children: [
+                IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.home,
+                      color: Colors.white,
+                    )),
+                const Text(
+                  "Home",
+                  style: TextStyle(color: Colors.white),
+                )
+              ],
+            ),
+          ),
+          const SizedBox(
+            width: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 10, bottom: 13),
+            child: Column(
+              children: [
+                IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.card_travel,
+                      color: Colors.white,
+                    )),
+                const Text(
+                  "Cart",
+                  style: TextStyle(color: Colors.white),
+                )
+              ],
+            ),
+          ),
+          const SizedBox(
+            width: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 10, bottom: 13),
+            child: Column(
+              children: [
+                IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.person,
+                      color: Colors.white,
+                    )),
+                const Text(
+                  "Profile",
+                  style: TextStyle(color: Colors.white),
+                )
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -122,21 +304,38 @@ class _Gallery_PageState extends State<Gallery_Page> {
 }
 
 class Row_Pictures extends StatelessWidget {
-  const Row_Pictures({super.key});
+  Row_Pictures({super.key, this.Pictures});
+
+  String? Pictures;
 
   @override
   Widget build(BuildContext context) {
+    if (Pictures == null) {
+      Pictures = "assets/Rectangle 32.png";
+    }
     return Container(
-        margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         height: 300,
         width: 130,
         child: Column(
           children: [
             Image.asset(
-              "assets/Rectangle 32.png",
+              '${Pictures}',
               fit: BoxFit.fill,
             ),
-            Text("Dead inside")
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+                margin: EdgeInsets.only(left: 7),
+                alignment: Alignment.bottomLeft,
+                child: const Text(
+                  "Dead inside",
+                  style: TextStyle(
+                      color: Colors.white70,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold),
+                ))
           ],
         ));
   }

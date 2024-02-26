@@ -58,7 +58,7 @@ class _Carousel_sliderState extends State<Carousel_slider> {
                           right: 10.0,
                           child: Text(
                             'A.L.O.N.E ${currentIndexPage}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 28,
                               fontWeight: FontWeight.bold,

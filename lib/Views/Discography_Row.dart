@@ -13,21 +13,38 @@ class Discography_Pics_row extends StatelessWidget {
       height: 190,
       child: ListView(
         scrollDirection: Axis.horizontal,
-        children: const [
-          // Image.asset("assets/afs.jpg",fit: BoxFit.cover,),
+        children:  [
 
-          Row_Pictures(),
-          Row_Pictures(),
-          Row_Pictures(),
-          Row_Pictures(),
-          Row_Pictures(),
-          Row_Pictures(),
-          Row_Pictures(),
-          Row_Pictures(),
-          Row_Pictures(),
-          Row_Pictures(),
-          Row_Pictures(),
-          Row_Pictures(),
+
+          Row_Pictures(
+            Pictures:   "assets/Rectangle 32.png",
+          ),
+
+          Row_Pictures(
+            Pictures:   "assets/Rectangle 38.png",
+          ),
+          Row_Pictures(
+            Pictures:   "assets/Rectangle 39.png",
+          ),
+          Row_Pictures(
+            Pictures:   "assets/Rectangle 32.png",
+          ),
+
+          Row_Pictures(
+            Pictures:   "assets/Rectangle 38.png",
+          ),
+          Row_Pictures(
+            Pictures:   "assets/Rectangle 39.png",
+          ),     Row_Pictures(
+            Pictures:   "assets/Rectangle 32.png",
+          ),
+
+          Row_Pictures(
+            Pictures:   "assets/Rectangle 38.png",
+          ),
+          Row_Pictures(
+            Pictures:   "assets/Rectangle 39.png",
+          ),
         ],
       ),
     );
