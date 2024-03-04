@@ -10,7 +10,7 @@ class Discography_Pics_row extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 190,
+      height: 191,
       child: ListView(
         scrollDirection: Axis.horizontal,
         children:  [
