@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:music_player/Views/Gallery_Page.dart';
+import 'package:music_player2/Views/Gallery_Page.dart';
+import 'package:music_player2/serveses/allsongs_list.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class Home_Page extends StatelessWidget {
   const Home_Page({super.key});
   static String id = "Home_Page";
+  Future<bool> requestPermission() async {
+    final status = await Permission.audio.request();
+    if (status != PermissionStatus.granted) {
+      return false;
+      print("Permission denied");
+    } else {
+      return true;
+      print("Permission granted");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +52,17 @@ class Home_Page extends StatelessWidget {
                         height: 65,
                       ),
                       GestureDetector(
-                        onTap: () =>
-                            Navigator.pushNamed(context, Gallery_Page.id),
+                        onTap: () async {
+                          //allsongs()
+                          //    Navigator.pushNamed(context, Gallery_Page.id),
+                          //                      );
+
+                          bool stt = await requestPermission();
+                          //  Navigator.pushNamed(context, allsongs.id);
+                          if (stt == true) {
+                            Navigator.pushNamed(context, Gallery_Page.id);
+                          } else {}
+                        },
                         child: Container(
                           child: const Center(
                               child: Text(

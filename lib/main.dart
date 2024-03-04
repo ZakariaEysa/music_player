@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'package:music_player/serveses/allsongs_list.dart';
+import 'package:music_player2/serveses/allsongs_list.dart';
 
 import 'Views/Gallery_Page.dart';
 
@@ -23,10 +22,11 @@ class MyApp extends StatelessWidget {
       routes: {
         Gallery_Page.id: (context) => Gallery_Page(),
         Home_Page.id: (context) => const Home_Page(),
+        allsongs.id: (context) => const allsongs(),
       },
       //
-        // initialRoute: Home_Page.id,
-      home: allsongs(),
+      initialRoute: Home_Page.id,
+      // home: allsongs(),
     );
   }
 }

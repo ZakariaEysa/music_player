@@ -1,82 +1,86 @@
 import 'package:flutter/material.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:permission_handler/permission_handler.dart';
+
 class allsongs extends StatefulWidget {
-  const allsongs({super.key});
+  // static Future<void> requestPermission() async {
+  //   final status = await Permission.audio.request();
+  //   if (status != PermissionStatus.granted) {
+  //
+  //     print(status.isGranted);
+  //     print("Permission denied");
+  //   } else {
+  //     print("Permission granted");
+  //   }
+  // }
+
+  const allsongs({Key? key}) : super(key: key);
+  static String id = "all_songs";
 
   @override
-  State<allsongs> createState() => _allsongsState();
+  State<allsongs> createState() => _allsongs();
 }
 
-class _allsongsState extends State<allsongs> {
+class _allsongs extends State<allsongs> {
+  late final OnAudioQuery audioQuery;
+  late List<SongModel> audios;
+
   @override
   void initState() {
-
-    // TODO: implement initState
     super.initState();
-    requestPermission();
-  }
-  void requestPermission(){
-
-     Permission.storage.request();
-
-
+    super.initState();
+    audioQuery = OnAudioQuery();
+    fetchAudios();
   }
 
-  final AudioQuery=OnAudioQuery();
+  Future<void> fetchAudios() async {
+    audios = await audioQuery.querySongs(
+      sortType: null,
+      orderType: OrderType.ASC_OR_SMALLER,
+      uriType: UriType.EXTERNAL,
+      ignoreCase: true,
+    );
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
       debugShowCheckedModeBanner: false,
-
       theme: ThemeData.dark(),
       home: Scaffold(
         appBar: AppBar(
-
           title: Text("Music List"),
-
         ),
-
         body: FutureBuilder<List<SongModel>>(
-          future: AudioQuery.querySongs(
+          future: audioQuery.querySongs(
             sortType: null,
             orderType: OrderType.ASC_OR_SMALLER,
             uriType: UriType.EXTERNAL,
-              ignoreCase: true
-
+            ignoreCase: true,
           ),
-          builder: (context, iteam) {
-
-
-            if(iteam.data==null){
-
-              return Center(child: CircularProgressIndicator(),);
-
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(child: CircularProgressIndicator());
             }
-            if(iteam.data!.isEmpty){
-
-              return Center(child: Text("no songs found "));
-
+            if (snapshot.hasError) {
+              return Center(child: Text("Error: ${snapshot.error}"));
             }
-            return  ListView.builder(
-              itemCount: 100,
+            final songs = snapshot.data;
+            if (songs == null || songs.isEmpty) {
+              return Center(child: Text("No songs found"));
+            }
+            return ListView.builder(
+              itemCount: songs.length,
               itemBuilder: (context, index) => ListTile(
                 leading: Icon(Icons.music_note),
-                title: Text(iteam.data![index].displayName),
-                subtitle: Text(iteam.data![index].artist.toString()),
+                title: Text(songs[index].title),
+                subtitle: Text(songs[index].artist ?? ""),
                 trailing: Icon(Icons.more_horiz),
-
-
-
-              ),);
-
-
-
+              ),
+            );
           },
-
         ),
-
       ),
     );
   }

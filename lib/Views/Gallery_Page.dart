@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:on_audio_query/on_audio_query.dart';
 
 import 'Discography_Row.dart';
 import 'carousel_slider.dart';
+import 'package:music_player2/serveses/allsongs_list.dart';
 
 class Gallery_Page extends StatefulWidget {
   @override
@@ -37,12 +39,15 @@ class _Gallery_PageState extends State<Gallery_Page> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(right: 15, bottom: 10, top: 5),
-                  child: Text(
-                    "See all",
-                    style: TextStyle(
-                        color: Colors.amber,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 23),
+                  child: GestureDetector(
+                    onTap: () => Navigator.pushNamed(context, allsongs.id),
+                    child: Text(
+                      "See all",
+                      style: TextStyle(
+                          color: Colors.amber,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 23),
+                    ),
                   ),
                 ),
               ],
@@ -65,12 +70,15 @@ class _Gallery_PageState extends State<Gallery_Page> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(right: 15, bottom: 10, top: 5),
-                  child: Text(
-                    "See all",
-                    style: TextStyle(
-                        color: Colors.amber,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 23),
+                  child: GestureDetector(
+                    onTap: () => Navigator.pushNamed(context, allsongs.id),
+                    child: Text(
+                      "See all",
+                      style: TextStyle(
+                          color: Colors.amber,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 23),
+                    ),
                   ),
                 ),
               ],
@@ -83,62 +91,98 @@ class _Gallery_PageState extends State<Gallery_Page> {
   }
 }
 
-class Pupular_Singles_List extends StatelessWidget {
+class Pupular_Singles_List extends StatefulWidget {
   const Pupular_Singles_List({super.key});
+
+  @override
+  State<Pupular_Singles_List> createState() => _Pupular_Singles_ListState();
+}
+
+class _Pupular_Singles_ListState extends State<Pupular_Singles_List> {
+  late final OnAudioQuery audioQuery;
+
+  late List<SongModel> audios;
+
+  @override
+  void initState() {
+    super.initState();
+    super.initState();
+    audioQuery = OnAudioQuery();
+    fetchAudios();
+  }
+
+  Future<void> fetchAudios() async {
+    audios = await audioQuery.querySongs(
+      sortType: null,
+      orderType: OrderType.ASC_OR_SMALLER,
+      uriType: UriType.EXTERNAL,
+      ignoreCase: true,
+    );
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       height: 290,
-      child: ListView(
-        children: [
-          Pupular_Singles(
+      child: ListView.builder(
+        itemCount: audios.length,
+        itemBuilder: (context, index) {
+          return Pupular_Singles(
+            Textt: audios[index].title,
             Pictures: "assets/Rectangle 32.png",
-          ),
-          Pupular_Singles(
-            Pictures: "assets/Rectangle 34.png",
-          ),
-          Pupular_Singles(
-            Pictures: "assets/Rectangle 38.png",
-          ),
-          Pupular_Singles(
-            Pictures: "assets/Rectangle 39.png",
-          ),
-          Pupular_Singles(
-            Pictures: "assets/Rectangle 32.png",
-          ),
-          Pupular_Singles(
-            Pictures: "assets/Rectangle 34.png",
-          ),
-          Pupular_Singles(
-            Pictures: "assets/Rectangle 38.png",
-          ),
-          Pupular_Singles(
-            Pictures: "assets/Rectangle 39.png",
-          ),
-          Pupular_Singles(
-            Pictures: "assets/Rectangle 32.png",
-          ),
-          Pupular_Singles(
-            Pictures: "assets/Rectangle 34.png",
-          ),
-          Pupular_Singles(
-            Pictures: "assets/Rectangle 38.png",
-          ),
-          Pupular_Singles(
-            Pictures: "assets/Rectangle 39.png",
-          ),
-        ],
+          );
+        },
+        // children: [
+        //   Pupular_Singles(
+        //     Pictures: "assets/Rectangle 32.png",
+        //
+        //   ),
+        //   Pupular_Singles(
+        //     Pictures: "assets/Rectangle 34.png",
+        //   ),
+        //   Pupular_Singles(
+        //     Pictures: "assets/Rectangle 38.png",
+        //   ),
+        //   Pupular_Singles(
+        //     Pictures: "assets/Rectangle 39.png",
+        //   ),
+        //   Pupular_Singles(
+        //     Pictures: "assets/Rectangle 32.png",
+        //   ),
+        //   Pupular_Singles(
+        //     Pictures: "assets/Rectangle 34.png",
+        //   ),
+        //   Pupular_Singles(
+        //     Pictures: "assets/Rectangle 38.png",
+        //   ),
+        //   Pupular_Singles(
+        //     Pictures: "assets/Rectangle 39.png",
+        //   ),
+        //   Pupular_Singles(
+        //     Pictures: "assets/Rectangle 32.png",
+        //   ),
+        //   Pupular_Singles(
+        //     Pictures: "assets/Rectangle 34.png",
+        //   ),
+        //   Pupular_Singles(
+        //     Pictures: "assets/Rectangle 38.png",
+        //   ),
+        //   Pupular_Singles(
+        //     Pictures: "assets/Rectangle 39.png",
+        //   ),
+        // ],
       ),
     );
   }
 }
 
 class Pupular_Singles extends StatelessWidget {
-  Pupular_Singles({super.key, this.Pictures});
+  Pupular_Singles({super.key, this.Pictures, this.Textt});
 
   String? Pictures;
+  String? Textt;
 
   @override
   Widget build(BuildContext context) {
@@ -165,7 +209,7 @@ class Pupular_Singles extends StatelessWidget {
                 padding: EdgeInsets.all(13),
                 alignment: Alignment.topCenter,
                 child: Text(
-                  "We Are Chaos",
+                  Textt!,
                   style: TextStyle(
                       color: Colors.white70,
                       fontWeight: FontWeight.bold,
